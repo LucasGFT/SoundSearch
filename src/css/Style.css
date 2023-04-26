@@ -46,17 +46,6 @@ li {
   justify-content: space-between;
   padding-right: 40px;
 }
-
-.formPesquisaArtista input {
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 5px;
-  font-size: 18px;
-  height: 35px;
-  padding: 10px;
-  width: 50%;
-}
-
 .formLogin input {
   background-color: white;
   border: 1px solid gray;
@@ -66,23 +55,7 @@ li {
   width: 20%;
 }
 
-.formPesquisaArtista input:focus {
-  border-color: #1db954;
-  outline: none;
-}
-
 .formLogin button {
-  background-color: #1db954;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  height: 40px;
-  width: 10%;
-}
-
-.formPesquisaArtista button {
   background-color: #1db954;
   border: none;
   border-radius: 5px;
@@ -106,8 +79,44 @@ li {
   text-decoration: none;
 }
 
+.formPesquisaArtista form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.formPesquisaArtista form {
+  width: 100%;
+}
+
 .formPesquisaArtista button:hover {
   background-color: #16a749;
+}
+
+.formPesquisaArtista input {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 18px;
+  height: 35px;
+  padding: 10px;
+  width: 50%;
+}
+
+.formPesquisaArtista button {
+  background-color: #1db954;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  height: 40px;
+  width: 10%;
+}
+
+.formPesquisaArtista input:focus {
+  border-color: #1db954;
+  outline: none;
 }
 
 .resultadoPesquisa {
@@ -121,6 +130,7 @@ li {
 
 .listaResultado {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin-top: 50px;
 }
