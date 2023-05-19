@@ -1,0 +1,52 @@
+
+
+.formPesquisaArtista form {
+  margin-top: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.formPesquisaArtista form {
+  width: 100%;
+}
+
+.formPesquisaArtista button:hover {
+  background-color: #16a749;
+}
+
+.formPesquisaArtista input {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 18px;
+  height: 35px;
+  padding: 10px;
+  width: 50%;
+}
+
+.formPesquisaArtista button {
+  background-color: #49bd72;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  height: 40px;
+  width: 10%;
+}
+
+.formPesquisaArtista input:focus {
+  border-color: #1db954;
+  outline: none;
+}
+
+@media (min-width:320px) and (max-width: 480px) {
+    .form-pesquisa {
+        flex-direction: column;
+    }
+    .form-pesquisa button {
+        width: auto;
+        margin-top: 10px;
+    }
+}

@@ -1,79 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { getUser } from '../services/userAPI';
-import Carregando from './Carregando';
+import React, { useMemo, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Contact from './Contact';
+import NavHeader from './nav/NavHeader';
 
-class Header extends React.Component {
-  state = {
-    usuario: {},
-    carregamento: false,
-  };
+function Header() {
+  const [nome] = useState(JSON.parse(localStorage.getItem('user_tune')));
 
-  componentDidMount() {
-    this.pegarUser();
-  }
-
-  pegarUser = async () => {
-    this.setState({ carregamento: true });
-    const objeto = await getUser();
-    this.setState({
-      carregamento: false,
-      usuario: objeto });
-  };
-
-  render() {
-    const { carregamento, usuario } = this.state;
-    return (
-      <div>
-        <header data-testid="header-component">
-          {carregamento === true ? (<Carregando />)
-            : (
-              <div>
-                <div className="nomeContact">
-                  <h2 data-testid="header-user-name">
-                    Nome:
-                    {' '}
-                    {usuario.name}
-                  </h2>
-                  <Contact />
-                </div>
-                <nav>
-                  <ul className="nav">
-                    <li>
-                      <Link
-                        to="/TrybeTunes/search"
-                        data-testid="link-to-search"
-                      >
-                        Search
-                      </Link>
-
-                    </li>
-                    <li>
-                      <Link
-                        to="/TrybeTunes/favorites"
-                        data-testid="link-to-favorites"
-                      >
-                        Favorites
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/TrybeTunes/profile"
-                        data-testid="link-to-profile"
-                      >
-                        Profile
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-
-              </div>
-            )}
-        </header>
+  const memoizedHeaderContent = useMemo(() => (
+    <div>
+      <div className="nomeContact">
+        <h2 data-testid="header-user-name">
+          Nome:
+          {' '}
+          {nome && nome.nome}
+        </h2>
+        <Contact />
       </div>
-    );
-  }
+      <NavHeader />
+    </div>
+  ), [nome]);
+  return (
+    <div>
+      {nome ? (
+        <header data-testid="header-component">
+          {memoizedHeaderContent}
+        </header>
+      ) : (<Redirect to="/TrybeTunes" />)}
+    </div>
+  );
 }
 
 export default Header;

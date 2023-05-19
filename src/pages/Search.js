@@ -1,113 +1,62 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Carregando from '../components/Carregando';
-import Header from '../components/Header';
-import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import TrybeTunesContext from '../contexts/context';
+import { loadMusicas } from '../contexts/actions';
+import FormPesquisa from '../components/forms/formPesquisa/formPesquisa';
+import MusicasArtista from '../components/musicasCard/MusicasArtista';
 
-let nomeArt;
-let AlbumArtista;
-let Lista;
-class Search extends React.Component {
-  state = {
-    nomeArtista: '',
-    isDisableButton: true,
-    carregando: false,
-    resposta: false,
-  };
+function Search() {
+  const [nomeArtista, setNomeArtista] = useState('');
+  const [valorPesquisa, setValorPesquisa] = useState('');
+  const [isDisableButton, setIsDisableButton] = useState(true);
+  const [carregamento, setCarregamento] = useState(false);
+  const [resposta, setResposta] = useState(false);
+  const context = useContext(TrybeTunesContext);
+  const { postsDispatch } = context;
+  const inputRef = useRef(null);
 
-  listarMusicas = () => {
-    Lista = (
-      <div className="listaResultado">
-        {AlbumArtista.length > 0 ? (
-          AlbumArtista.map((element) => (
-            <div key={ element.artworkUrl100 }>
-              <span className="listaResultadoImg">
-                <img src={ element.artworkUrl100 } alt={ element.artistName } />
-              </span>
-              <h3>
-                {`Nome: ${element.collectionName}`}
-              </h3>
-              <h5>{`Artista ${element.artistName}`}</h5>
-              <h5>{element.artistName}</h5>
-              <span className="listaResultadoButton">
-                <Link
-                  to={ `/TrybeTunes/album/${element.collectionId}` }
-                  data-testid={ `link-to-album-${element.collectionId}` }
-                >
-                  Procurar Album
-                </Link>
-              </span>
-            </div>))
-        ) : (<h1>Nenhum álbum foi encontrado</h1>)}
-      </div>
-    );
-  };
-
-  clickButton = async () => {
-    const { nomeArtista } = this.state;
-    nomeArt = nomeArtista;
-    this.setState({ carregando: true });
-    AlbumArtista = await searchAlbumsAPI(nomeArtista);
-    this.setState({ nomeArtista: '', carregando: false, resposta: true });
-    this.listarMusicas();
-    console.log(AlbumArtista);
-  };
-
-  haveChange = (event) => {
+  const haveChange = (event) => {
     const { target } = event;
     const { value } = target;
-    this.setState({
-      nomeArtista: value,
-    }, () => {
-      const { nomeArtista } = this.state;
-      if (nomeArtista.length > 1) {
-        this.setState({ isDisableButton: false });
-      } else { this.setState({ isDisableButton: true }); }
-    });
+    setNomeArtista(value);
   };
 
-  render() {
-    const { nomeArtista, isDisableButton, carregando, resposta } = this.state;
-    return (
-      <div data-testid="page-search">
-        <Header />
-        { carregando === true ? (<Carregando />) : (
+  const clickButton = async () => {
+    setCarregamento(true);
+    setValorPesquisa(nomeArtista);
+    await loadMusicas(postsDispatch, nomeArtista).then((dispatch) => dispatch());
+    setResposta(true);
+    setCarregamento(false);
+  };
+
+  useEffect(() => {
+    if (nomeArtista.length > 2) {
+      setIsDisableButton(false);
+    } else {
+      setIsDisableButton(true);
+    }
+  }, [nomeArtista]);
+
+  return (
+    <div data-testid="page-search">
+      { carregamento === true ? (<Carregando />) : (
+        <>
           <div className="formPesquisaArtista">
-            <form>
-              <input
-                placeholder="Nome do Artista:"
-                data-testid="search-artist-input"
-                onChange={ this.haveChange }
-                value={ nomeArtista }
-              />
-              <button
-                type="button"
-                disabled={ isDisableButton }
-                data-testid="search-artist-button"
-                onClick={ this.clickButton }
-              >
-                Pesquisar
-              </button>
-            </form>
+            <FormPesquisa
+              nomeArtista={ nomeArtista }
+              haveChange={ haveChange }
+              inputRef={ inputRef }
+              isDisableButton={ isDisableButton }
+              clickButton={ clickButton }
+            />
           </div>
-        ) }
-        {
-          resposta
-          && (
-            <div className="resultadoPesquisa">
-              <h2>
-                Álbuns de:
-                {' '}
-                {nomeArt}
-              </h2>
-              <br />
-              {Lista}
-            </div>
-          )
-        }
-      </div>
-    );
-  }
+          {resposta && (
+            <MusicasArtista valorPesquisa={ valorPesquisa } />
+          )}
+        </>
+      ) }
+    </div>
+  );
 }
 
 export default Search;

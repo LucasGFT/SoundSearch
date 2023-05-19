@@ -1,0 +1,43 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 40px;
+}
+
+nav div {
+    display: flex;
+    justify-content: center;
+}
+
+nav a:hover {
+    color: #191414;
+}
+
+nav a {
+    color: white;
+    font-size: 18px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+nav {
+    align-items: center;
+    background-color: #49bd72;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+@media (min-width:320px) and (max-width: 480px) {
+    .nav {
+        padding: 10px 5px;
+    }
+
+    .nav a {
+        font-size: 20px;
+    }
+}

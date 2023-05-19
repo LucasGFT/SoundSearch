@@ -1,0 +1,53 @@
+.formLogin label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.formLogin input {
+  background-color: white;
+  border: 1px solid gray;
+  font-size: 18px;
+  height: 25px;
+  padding: 10px;
+  width: 20%;
+}
+
+.formLogin button {
+  background-color: #49bd72;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  height: 40px;
+  width: 10%;
+}
+
+.formLogin button:disabled {
+  background-color: rgb(0, 0, 0);
+}
+
+.formLogin button:disabled:hover {
+  cursor: not-allowed;
+}
+
+.nomeContact {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nomeContact img {
+    max-height: 45px;
+  }
+
+  .contact img {
+    padding: 10px;
+  }
+
+  .contact {
+    width: auto;
+  }

@@ -1,38 +1,33 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useReducer } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
-import Search from './pages/Search';
-import Album from './pages/Album';
-import Favorites from './pages/Favorites';
-import Profile from './pages/Profile';
-import ProfileEdit from './pages/ProfileEdit';
-import NotFound from './pages/NotFound';
+import LoginLayout from './Layout/LoginLayout';
+import data from './contexts/data';
+import { reducer } from './contexts/reducer';
 import './css/Style.css';
+import TrybeTunesContext from './contexts/context';
+import DefaultLayout from './Layout/DefaultLayout';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="titulo">
-          <h1>TrybeTunes</h1>
-        </div>
+function App() {
+  const [postsState, postsDispatch] = useReducer(reducer, data);
+  document.title = 'SoundSearch';
+
+  return (
+    <div>
+      <div className="titulo">
+        <h1>SoundSearch</h1>
+      </div>
+      <TrybeTunesContext.Provider value={ { postsState, postsDispatch } }>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/TrybeTunes" component={ Login } />
-            <Route path="/TrybeTunes/search" component={ Search } />
-            <Route
-              path="/TrybeTunes/album/:id"
-              render={ (props) => <Album { ...props } /> }
-            />
-            <Route path="/TrybeTunes/favorites" component={ Favorites } />
-            <Route exact path="/TrybeTunes/profile" component={ Profile } />
-            <Route path="/TrybeTunes/profile/edit" component={ ProfileEdit } />
-            <Route component={ NotFound } />
+            <Route exact path="/TrybeTunes" component={ LoginLayout } />
+            <Route component={ DefaultLayout } />
           </Switch>
         </BrowserRouter>
-      </div>
-    );
-  }
+
+      </TrybeTunesContext.Provider>
+    </div>
+  );
 }
 
 export default App;

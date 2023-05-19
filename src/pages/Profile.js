@@ -1,45 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import React, { useContext, useState } from 'react';
+import TrybeTunesContext from '../contexts/context';
+import ProfileEdit from './ProfileEdit';
+import InfoUser from '../components/tabela/infoUser/InfoUser';
+import ButtonDefault from '../components/button/buttonDefault/buttonDefault';
 
-class Profile extends React.Component {
-  state = {
-    musicasFavoritas: [],
-  };
+function Profile() {
+  const context = useContext(TrybeTunesContext);
+  const { postsState } = context;
+  const [alterarCadastro, setAlterarCadastro] = useState(false);
+  const { usuario } = postsState;
 
-  componentDidMount() {
-    this.pegarMusicasFavoritas();
-  }
-
-  pegarMusicasFavoritas = async () => {
-    const Musica = await getFavoriteSongs();
-    this.setState({ musicasFavoritas: Musica });
-  };
-
-  render() {
-    const { musicasFavoritas } = this.state;
-    const numeroDeMusicasFavoritas = musicasFavoritas.length;
-    return (
-      <div data-testid="page-profile">
-        <Header />
-        <p>{`Você tem no total ${numeroDeMusicasFavoritas} musicas como favoritas`}</p>
-        {numeroDeMusicasFavoritas > 0 ? (
-          <button type="button" className="buttonVerMusicas">
-            <Link to="/TrybeTunes/favorites" className="linkFavoritesButton">
-              Ver Musicas
-            </Link>
-          </button>
-        ) : (
-          <button type="button" className="buttonVerMusicas">
-            <Link to="/TrybeTunes/search" className="linkFavoritesButton">
-              Adicionar Musicas
-            </Link>
-          </button>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div data-testid="page-profile">
+      {alterarCadastro ? (<ProfileEdit
+        fecharForm={ (pa) => setAlterarCadastro(pa) }
+      />) : (
+        <div className="profile">
+          <InfoUser usuario={ usuario } />
+          <ButtonDefault propsButton={ { func: setAlterarCadastro, params: true } } />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Profile;

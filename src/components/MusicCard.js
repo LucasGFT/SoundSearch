@@ -1,48 +1,71 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { addFavorite, rmFavorite } from '../contexts/actions';
+import TrybeTunesContext from '../contexts/context';
 
-class MusicCard extends React.Component {
-  render() {
-    const {
-      trackName,
-      previewUrl,
-      funcaoFavoritar,
-      element,
-      funcaoPegarFavoritas,
-    } = this.props;
-    return (
-      <div>
-        <h5>{trackName}</h5>
-        <div className="audioButton">
-          <audio data-testid="audio-component" src={ previewUrl } controls>
-            <track kind="captions" />
-            O seu navegador não suporta o elemento
-            {' '}
-            <code>audio</code>
-            .
-          </audio>
+function MusicCard({ musica }) {
+  const context = useContext(TrybeTunesContext);
+  const { postsState, postsDispatch } = context;
+  const [musicaFavoritada, setMusicaFavoritada] = useState(false);
+
+  const removeFavorite = () => {
+    const asss = postsState.favoritos.findIndex((mus) => mus.trackId === musica.trackId);
+    const musicas = postsState.favoritos;
+    musicas.splice(asss, 1);
+    rmFavorite(postsDispatch, musicas).then((dispatch) => dispatch());
+    setMusicaFavoritada(false);
+  };
+
+  const addFavorites = () => {
+    addFavorite(postsDispatch, musica).then((dispatch) => dispatch());
+  };
+
+  useEffect(() => {
+    postsState.favoritos.filter((elem) => {
+      if (JSON.stringify(elem) === JSON.stringify(musica)) {
+        setMusicaFavoritada(true);
+        return true;
+      }
+      return false;
+    });
+  }, [musica, postsState.favoritos]);
+
+  return (
+    <div>
+      <div className="audioButton">
+        <h5>{musica.trackName}</h5>
+        <audio data-testid="audio-component" src={ musica.previewUrl } controls>
+          <track kind="captions" />
+          O seu navegador não suporta o elemento
+          {' '}
+          <code>audio</code>
+          .
+        </audio>
+        {musicaFavoritada ? (
+          <button
+            className="buttonDesfavoritarMusica"
+            onClick={ removeFavorite }
+            type="button"
+          >
+            Desfavoritar
+
+          </button>
+        ) : (
           <button
             type="button"
-            className="buttonVerMusicas"
-            onClick={ async () => {
-              await funcaoFavoritar(element);
-              await funcaoPegarFavoritas();
-            } }
+            className="buttonFavoritarMusica"
+            onClick={ addFavorites }
           >
             Favoritar
           </button>
-        </div>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 MusicCard.propTypes = {
-  trackName: PropTypes.string.isRequired,
-  previewUrl: PropTypes.string.isRequired,
-  funcaoFavoritar: PropTypes.func.isRequired,
-  element: PropTypes.shape().isRequired,
-  funcaoPegarFavoritas: PropTypes.func.isRequired,
+  musica: PropTypes.shape().isRequired,
 };
 
 export default MusicCard;
