@@ -1,25 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MusicCard from '../components/MusicCard';
 import SoundSearchContext from '../contexts/context';
 import { getMusics } from '../contexts/actions';
+import getMusicss from '../services/musicsAPI';
 import Carregando from '../components/Carregando';
 
 function Album() {
   const [carregando, setCarregamento] = useState(false);
+  const [encontrouMusica, setEncontrouMusica] = useState(false);
   const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const { location: { pathname } } = useHistory();
   const id = pathname.split('/').pop();
 
   useEffect(() => {
-    setCarregamento(true);
     const fetchData = async () => {
-      await getMusics(postsDispatch, id).then((dispatch) => dispatch());
+      const requestJson = await getMusicss(id);
+      if (!requestJson) return setEncontrouMusica(false);
+      setEncontrouMusica(true);
+      getMusics(postsDispatch, requestJson).then((dispatch) => dispatch());
+      return true;
     };
-    setCarregamento(false);
+    setCarregamento(true);
     fetchData();
+    setCarregamento(false);
   }, [id, postsDispatch]);
 
   return (
@@ -27,35 +32,29 @@ function Album() {
       {carregando ? (
         <Carregando />
       ) : (
-        postsState.musica.length > 0 && (
-          <>
+        <>
+          {!encontrouMusica && (
+            <div>Não foi possível encontrar música</div>
+          )}
+          {encontrouMusica && postsState.musica.length > 0 && (
             <div className="descricao-musica">
               <h3 data-testid="album-name">
                 {`Album: ${postsState.musica[0].collectionName}`}
-
               </h3>
               <h4>
                 {`Artista(s): ${postsState.musica[0].artistName}`}
               </h4>
+              <div className="todas-musica-album">
+                {postsState.musica.slice(1).map((element, index) => (
+                  <MusicCard musica={ element } key={ index + 1 } />
+                ))}
+              </div>
             </div>
-            <div className="todas-musica-album">
-              {postsState.musica.slice(1).map((element, index) => (
-                <MusicCard musica={ element } key={ index + 1 } />
-              ))}
-            </div>
-          </>
-        )
+          )}
+        </>
       )}
     </div>
   );
 }
-
-Album.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
-};
 
 export default Album;

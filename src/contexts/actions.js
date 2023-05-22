@@ -6,11 +6,9 @@ const loadMusicas = async (dispatch, artistNameURL) => {
   return () => dispatch({ type: 'loadMusicas', payload: musicas });
 };
 
-const getMusics = async (dispatch, id) => {
-  const request = await fetch(`https://itunes.apple.com/lookup?id=${id}&entity=song`);
-  const requestJson = await request.json();
-  return () => dispatch({ type: 'loadMusica', payload: requestJson.results });
-};
+const getMusics = async (dispatch, musicas) => () => dispatch(
+  { type: 'loadMusica', payload: musicas },
+);
 
 const getUser = async (dispatch, name) => () => dispatch({
   type: 'sendUser', payload: name });

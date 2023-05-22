@@ -115,6 +115,7 @@ body {
 .audioButton {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 900px;
   justify-items: center;
   align-items: center;
 }

@@ -22,7 +22,7 @@ function MusicCard({ musica }) {
 
   useEffect(() => {
     postsState.favoritos.filter((elem) => {
-      if (JSON.stringify(elem) === JSON.stringify(musica)) {
+      if (elem.trackId === musica.trackId) {
         setMusicaFavoritada(true);
         return true;
       }
