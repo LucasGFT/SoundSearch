@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/SoundSearch/static/css/main.72ebd521.css",
-    "main.js": "/SoundSearch/static/js/main.c2cc21ba.js",
+    "main.js": "/SoundSearch/static/js/main.581edb8f.js",
     "index.html": "/SoundSearch/index.html",
     "main.72ebd521.css.map": "/SoundSearch/static/css/main.72ebd521.css.map",
-    "main.c2cc21ba.js.map": "/SoundSearch/static/js/main.c2cc21ba.js.map"
+    "main.581edb8f.js.map": "/SoundSearch/static/js/main.581edb8f.js.map"
   },
   "entrypoints": [
     "static/css/main.72ebd521.css",
-    "static/js/main.c2cc21ba.js"
+    "static/js/main.581edb8f.js"
   ]
 }
