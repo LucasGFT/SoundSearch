@@ -25,7 +25,7 @@ function Header() {
         <header data-testid="header-component">
           {memoizedHeaderContent}
         </header>
-      ) : (<Redirect to="/TrybeTunes" />)}
+      ) : (<Redirect to="/SoundSearch" />)}
     </div>
   );
 }

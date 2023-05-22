@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import p from 'prop-types';
-import TrybeTunesContext from '../contexts/context';
+import SoundSearchContext from '../contexts/context';
 import { createUser } from '../contexts/actions';
 import FormUpdateUser from '../components/forms/formUpdateUser/FormUpdateUser';
 
 function ProfileEdit({ fecharForm }) {
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const [email, setEmail] = useState(postsState.usuario.email);
   const [nome, setNome] = useState(postsState.usuario.nome);

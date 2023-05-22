@@ -1,9 +1,9 @@
 import { useContext, useRef } from 'react';
-import TrybeTunesContext from '../../contexts/context';
+import SoundSearchContext from '../../contexts/context';
 import { rmFavorite } from '../../contexts/actions';
 
 function CardMusicaResultSearch() {
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const musicasFavoritas = useRef(postsState.favoritos);
 

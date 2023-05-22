@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { addFavorite, rmFavorite } from '../contexts/actions';
-import TrybeTunesContext from '../contexts/context';
+import SoundSearchContext from '../contexts/context';
 
 function MusicCard({ musica }) {
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const [musicaFavoritada, setMusicaFavoritada] = useState(false);
 

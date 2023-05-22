@@ -1,10 +1,10 @@
 import p from 'prop-types';
 import { useContext } from 'react';
 import Musicas from '../Musicas';
-import TrybeTunesContext from '../../contexts/context';
+import SoundSearchContext from '../../contexts/context';
 
 function MusicasArtista({ valorPesquisa }) {
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState } = context;
   return (
     <div className="resultadoPesquisa">

@@ -12,11 +12,11 @@ function DefaultLayout() {
     <>
       <Header />
       <Switch>
-        <Route exact path="/TrybeTunes/search" component={ Search } />
-        <Route exact path="/TrybeTunes/album/:id" component={ Album } />
-        <Route exact path="/TrybeTunes/favorites" component={ Favorites } />
-        <Route exact path="/TrybeTunes/profile" component={ Profile } />
-        <Route exact path="/TrybeTunes/profile/edit" component={ ProfileEdit } />
+        <Route exact path="/SoundSearch/search" component={ Search } />
+        <Route exact path="/SoundSearch/album/:id" component={ Album } />
+        <Route exact path="/SoundSearch/favorites" component={ Favorites } />
+        <Route exact path="/SoundSearch/profile" component={ Profile } />
+        <Route exact path="/SoundSearch/profile/edit" component={ ProfileEdit } />
         <Route component={ NotFound } />
       </Switch>
     </>

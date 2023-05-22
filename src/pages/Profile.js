@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import TrybeTunesContext from '../contexts/context';
+import SoundSearchContext from '../contexts/context';
 import ProfileEdit from './ProfileEdit';
 import InfoUser from '../components/tabela/infoUser/InfoUser';
 import ButtonDefault from '../components/button/buttonDefault/buttonDefault';
 
 function Profile() {
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState } = context;
   const [alterarCadastro, setAlterarCadastro] = useState(false);
   const { usuario } = postsState;

@@ -18,7 +18,7 @@ export default function Musicas({ musicas }) {
           <h5>{elem.artistName}</h5>
           <span className="listaResultadoButton">
             <Link
-              to={ `/TrybeTunes/album/${elem.collectionId}` }
+              to={ `/SoundSearch/album/${elem.collectionId}` }
               data-testid={ `link-to-album-${elem.collectionId}` }
             >
               Procurar Album

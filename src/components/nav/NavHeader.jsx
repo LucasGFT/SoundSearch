@@ -6,13 +6,13 @@ function NavHeader() {
     <nav>
       <ul className="nav">
         <li>
-          <Link to="/TrybeTunes/search">Procurar</Link>
+          <Link to="/SoundSearch/search">Procurar</Link>
         </li>
         <li>
-          <Link to="/TrybeTunes/favorites">Favoritas</Link>
+          <Link to="/SoundSearch/favorites">Favoritas</Link>
         </li>
         <li>
-          <Link to="/TrybeTunes/profile">Perfil</Link>
+          <Link to="/SoundSearch/profile">Perfil</Link>
         </li>
       </ul>
     </nav>

@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MusicCard from '../components/MusicCard';
-import TrybeTunesContext from '../contexts/context';
+import SoundSearchContext from '../contexts/context';
 import { getMusics } from '../contexts/actions';
 import Carregando from '../components/Carregando';
 
 function Album() {
   const [carregando, setCarregamento] = useState(false);
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const { location: { pathname } } = useHistory();
   const id = pathname.split('/').pop();

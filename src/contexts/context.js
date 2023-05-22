@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const TrybeTunesContext = createContext();
+const SoundSearchContext = createContext();
 
-export default TrybeTunesContext;
+export default SoundSearchContext;

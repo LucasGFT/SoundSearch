@@ -5,7 +5,7 @@ import NotFound from '../pages/NotFound';
 function LoginLayout() {
   return (
     <Switch>
-      <Route exact path="/TrybeTunes" component={ Login } />
+      <Route exact path="/SoundSearch" component={ Login } />
       <Route component={ NotFound } />
     </Switch>
   );

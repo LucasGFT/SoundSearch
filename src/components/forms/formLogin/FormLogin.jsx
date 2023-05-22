@@ -1,6 +1,6 @@
 import { Redirect } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
-import TrybeTunesContext from '../../../contexts/context';
+import SoundSearchContext from '../../../contexts/context';
 import { getUser } from '../../../contexts/actions';
 import './style.css';
 
@@ -11,7 +11,7 @@ function FormLogin() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [isDisableButton, setIsDisableButton] = useState(true);
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsDispatch } = context;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function FormLogin() {
   };
 
   if (shouldRedirect) {
-    return <Redirect to="/TrybeTunes/search" />;
+    return <Redirect to="/SoundSearch/search" />;
   }
 
   return (

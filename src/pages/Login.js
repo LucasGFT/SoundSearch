@@ -7,7 +7,7 @@ function Login() {
 
   return (
     <div data-testid="page-login">
-      {user && <Redirect to="/TrybeTunes/search" />}
+      {user && <Redirect to="/SoundSearch/search" />}
       <FormLogin />
     </div>
   );

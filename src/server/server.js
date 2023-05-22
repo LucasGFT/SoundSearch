@@ -7,7 +7,7 @@ const PORT = 3000;
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/TrybeTunes', (req, res) => {
+app.get('/SoundSearch', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', '../index.js'));
 });
 

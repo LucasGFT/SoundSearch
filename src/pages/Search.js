@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Carregando from '../components/Carregando';
-import TrybeTunesContext from '../contexts/context';
+import SoundSearchContext from '../contexts/context';
 import { loadMusicas } from '../contexts/actions';
 import FormPesquisa from '../components/forms/formPesquisa/formPesquisa';
 import MusicasArtista from '../components/musicasCard/MusicasArtista';
@@ -11,7 +11,7 @@ function Search() {
   const [isDisableButton, setIsDisableButton] = useState(true);
   const [carregamento, setCarregamento] = useState(false);
   const [resposta, setResposta] = useState(false);
-  const context = useContext(TrybeTunesContext);
+  const context = useContext(SoundSearchContext);
   const { postsDispatch } = context;
   const inputRef = useRef(null);
 

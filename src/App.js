@@ -5,7 +5,7 @@ import LoginLayout from './Layout/LoginLayout';
 import data from './contexts/data';
 import { reducer } from './contexts/reducer';
 import './css/Style.css';
-import TrybeTunesContext from './contexts/context';
+import SoundSearchContext from './contexts/context';
 import DefaultLayout from './Layout/DefaultLayout';
 
 function App() {
@@ -17,15 +17,15 @@ function App() {
       <div className="titulo">
         <h1>SoundSearch</h1>
       </div>
-      <TrybeTunesContext.Provider value={ { postsState, postsDispatch } }>
+      <SoundSearchContext.Provider value={ { postsState, postsDispatch } }>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/TrybeTunes" component={ LoginLayout } />
+            <Route exact path="/SoundSearch" component={ LoginLayout } />
             <Route component={ DefaultLayout } />
           </Switch>
         </BrowserRouter>
 
-      </TrybeTunesContext.Provider>
+      </SoundSearchContext.Provider>
     </div>
   );
 }
