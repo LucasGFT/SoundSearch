@@ -1,10 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Contact from './Contact';
 import NavHeader from './nav/NavHeader';
+import SoundSearchContext from '../contexts/context';
 
 function Header() {
-  const [nome] = useState(JSON.parse(localStorage.getItem('user_tune')));
+  const context = useContext(SoundSearchContext);
+  const { postsState } = context;
+  const [nome, setNome] = useState(postsState.usuario.nome);
+
+  useEffect(() => {
+    setNome(postsState.usuario.nome);
+  }, [postsState.usuario.nome]);
 
   const memoizedHeaderContent = useMemo(() => (
     <div>
@@ -12,7 +19,7 @@ function Header() {
         <h2 data-testid="header-user-name">
           Nome:
           {' '}
-          {nome && nome.nome}
+          {nome}
         </h2>
         <Contact />
       </div>

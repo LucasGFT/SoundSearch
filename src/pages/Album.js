@@ -8,7 +8,7 @@ import Carregando from '../components/Carregando';
 
 function Album() {
   const [carregando, setCarregamento] = useState(false);
-  const [encontrouMusica, setEncontrouMusica] = useState(false);
+  const [encontrouMusica, setEncontrouMusica] = useState(null);
   const context = useContext(SoundSearchContext);
   const { postsState, postsDispatch } = context;
   const { location: { pathname } } = useHistory();
@@ -33,8 +33,8 @@ function Album() {
         <Carregando />
       ) : (
         <>
-          {!encontrouMusica && (
-            <div>Não foi possível encontrar música</div>
+          {encontrouMusica === false && (
+            <div>Não foi possível encontrar esta música</div>
           )}
           {encontrouMusica && postsState.musica.length > 0 && (
             <div className="descricao-musica">
